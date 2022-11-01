@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
 
 function App() {
+  const [jokes, setJokes] = useState('')
+
+  async function fetchJoke() {
+    const response = await fetch('https://api.chucknorris.io/jokes/random');
+    const res = await response.json();
+    console.log(res);
+    setJokes(res)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Joke Generator</h1>
+      <div className="joke">
+        <p>{jokes.value}</p>
+      </div>
+      <button onClick={fetchJoke}>PUSH ME</button>
     </div>
-  );
+  )
 }
 
 export default App;
