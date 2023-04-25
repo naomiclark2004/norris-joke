@@ -5,7 +5,18 @@ function App() {
   const [jokes, setJokes] = useState('')
 
   async function fetchJoke() {
-    const response = await fetch('https://api.chucknorris.io/jokes/random');
+    let url = `https://api.chucknorris.io/jokes/random`;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'X-RapidAPI-Key': '855f56251bmsh356d45fc2129645p17cb05jsnc4d4b23c0a33',
+        'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+      }
+    };
+    console.log(url);
+    const response = await fetch(url, options);
+    
     const res = await response.json();
     console.log(res);
     setJokes(res)
